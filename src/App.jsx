@@ -1,113 +1,108 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import { Footer, Header, Main } from './layout';
 
-export class App extends Component {
-	state = {
-		data: [],
-		currentStatusTask: 'without a status'
+export const App = () => {
+	const [data, setData] = useState([]);
+	const [currentStatusTask, setCurrentStatusTask] =
+		useState('without a status');
+
+	const statusTask = {
+		withoutStatus: 'without a status',
+		notCompleted: 'not completed',
+		completed: 'completed'
 	};
 
-	render() {
-		const statusTask = {
-			withoutStatus: 'without a status',
-			notCompleted: 'not completed',
-			completed: 'completed'
-		};
+	const handleFilter = status => {
+		if (!status) {
+			setCurrentStatusTask(statusTask.withoutStatus);
+		}
 
-		const handleFilter = status => {
-			this.setState({ originalData: this.state.data });
+		if (status === statusTask.notCompleted) {
+			setCurrentStatusTask(statusTask.notCompleted);
+		}
 
-			if (!status) {
-				this.setState({ currentStatusTask: statusTask.withoutStatus });
-			}
+		if (status === statusTask.completed) {
+			setCurrentStatusTask(statusTask.completed);
+		}
+	};
 
-			if (status === statusTask.notCompleted) {
-				this.setState({ currentStatusTask: statusTask.notCompleted });
-			}
+	const handleDeleteCompleted = () => {
+		const newData = data.filter(item => {
+			return item.status === statusTask.notCompleted;
+		});
 
-			if (status === statusTask.completed) {
-				this.setState({ currentStatusTask: statusTask.completed });
-			}
-		};
+		setData(newData);
+	};
 
-		const handleDeleteCompleted = () => {
-			const newData = this.state.data.filter(item => {
-				return item.status === statusTask.notCompleted;
-			});
+	const handleDelete = id => {
+		const newData = data.filter(item => {
+			return item.id !== id;
+		});
 
-			this.setState({ data: newData });
-		};
+		setData(newData);
+	};
 
-		const handleDelete = id => {
-			const newData = this.state.data.filter(item => {
-				return item.id !== id;
-			});
+	const handleAddOrEdit = (value, id, typeAction = 'create') => {
+		if (typeAction === 'create') {
+			const item = {
+				id: data.length + 1,
+				text: value,
+				creationDate: new Date(),
+				status: statusTask.notCompleted
+			};
+			const newData = [...data, item];
 
-			this.setState({ data: newData });
-		};
-
-		const handleAddOrEdit = (value, id, typeAction = 'create') => {
-			if (typeAction === 'create') {
-				const item = {
-					id: this.state.data.length + 1,
-					text: value,
-					creationDate: new Date(),
-					status: statusTask.notCompleted
-				};
-				const newData = [...this.state.data, item];
-
-				this.setState({ data: newData });
-			} else {
-				const newData = this.state.data.map(item => {
-					if (item.id === id) {
-						return { ...item, text: value };
-					}
-
-					return item;
-				});
-
-				this.setState({ data: newData });
-			}
-		};
-
-		const handleUpdateStatus = id => {
-			const newData = this.state.data.map(item => {
+			setData(newData);
+		} else {
+			const newData = data.map(item => {
 				if (item.id === id) {
-					return {
-						...item,
-						status: `${
-							item.status === statusTask.notCompleted
-								? statusTask.completed
-								: statusTask.notCompleted
-						}`
-					};
+					return { ...item, text: value };
 				}
 
 				return item;
 			});
 
-			this.setState({ data: newData });
-		};
+			setData(newData);
+		}
+	};
 
-		return (
-			<section className="wrapper">
-				<Header handleAddOrEdit={handleAddOrEdit} />
-				<Main
-					data={this.state.data}
-					currentStatusTask={this.state.currentStatusTask}
-					statusTask={statusTask}
-					handleAddOrEdit={handleAddOrEdit}
-					handleDelete={handleDelete}
-					handleUpdateStatus={handleUpdateStatus}
-				/>
-				<Footer
-					data={this.state.data}
-					currentStatusTask={this.state.currentStatusTask}
-					handleFilter={handleFilter}
-					handleDeleteCompleted={handleDeleteCompleted}
-					statusTask={statusTask}
-				/>
-			</section>
-		);
-	}
-}
+	const handleUpdateStatus = id => {
+		const newData = data.map(item => {
+			if (item.id === id) {
+				return {
+					...item,
+					status: `${
+						item.status === statusTask.notCompleted
+							? statusTask.completed
+							: statusTask.notCompleted
+					}`
+				};
+			}
+
+			return item;
+		});
+
+		setData(newData);
+	};
+
+	return (
+		<section className="wrapper">
+			<Header handleAddOrEdit={handleAddOrEdit} />
+			<Main
+				data={data}
+				currentStatusTask={currentStatusTask}
+				statusTask={statusTask}
+				handleAddOrEdit={handleAddOrEdit}
+				handleDelete={handleDelete}
+				handleUpdateStatus={handleUpdateStatus}
+			/>
+			<Footer
+				data={data}
+				currentStatusTask={currentStatusTask}
+				handleFilter={handleFilter}
+				handleDeleteCompleted={handleDeleteCompleted}
+				statusTask={statusTask}
+			/>
+		</section>
+	);
+};
