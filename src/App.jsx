@@ -15,8 +15,6 @@ export class App extends Component {
 		};
 
 		const handleFilter = status => {
-			this.setState({ originalData: this.state.data });
-
 			if (!status) {
 				this.setState({ currentStatusTask: statusTask.withoutStatus });
 			}
