@@ -45,6 +45,10 @@ body {
 	outline: 0;
 }
 
+#root {
+	padding: 0 10px;
+}
+
 .hidden {
 	display: none;
 }
