@@ -1,3 +1,3 @@
 # «React ToDo»
 
-[Deploy link](https://react-todo-phi-navy.vercel.app/)
+[Deploy link](https://react-to-do-mocha-six.vercel.app/)
