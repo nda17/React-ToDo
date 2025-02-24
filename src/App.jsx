@@ -42,11 +42,13 @@ export const App = () => {
 		setData(newData);
 	};
 
-	const handleAddOrEdit = (value, id, typeAction = 'create') => {
+	const handleAddOrEdit = (task, min, sec, id, typeAction = 'create') => {
 		if (typeAction === 'create') {
 			const item = {
 				id: data.length + 1,
-				text: value,
+				text: task,
+				min: min,
+				sec: sec,
 				creationDate: new Date(),
 				status: statusTask.notCompleted
 			};
@@ -56,7 +58,7 @@ export const App = () => {
 		} else {
 			const newData = data.map(item => {
 				if (item.id === id) {
-					return { ...item, text: value };
+					return { ...item, text: task, min: min, sec: sec };
 				}
 
 				return item;
