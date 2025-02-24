@@ -12,18 +12,30 @@ export const TaskTimer = props => {
 	const formatTime = time => (time < 10 ? `0${time}` : time);
 
 	const startTimer = () => {
+		if (isRunning) {
+			return;
+		}
+
 		setIsRunning(true);
+
 		const interval = setInterval(() => {
-			if (seconds > 0) {
-				setSeconds(prevSeconds => prevSeconds - 1);
-			} else if (minutes > 0) {
-				setMinutes(prevMinutes => prevMinutes - 1);
-				setSeconds(59);
-			} else {
-				clearInterval(interval);
-				setIsRunning(false);
-			}
+			setSeconds(prevSeconds => {
+				if (prevSeconds > 0) return prevSeconds - 1;
+				setMinutes(prevMinutes => {
+					if (prevMinutes > 0) {
+						setSeconds(59);
+						return prevMinutes - 1;
+					}
+
+					clearInterval(interval);
+					setIsRunning(false);
+
+					return 0;
+				});
+				return 0;
+			});
 		}, 1000);
+
 		setTimer(interval);
 	};
 
@@ -33,41 +45,23 @@ export const TaskTimer = props => {
 	};
 
 	useEffect(() => {
-		return () => clearInterval(timer);
-	}, [timer]);
-
-	const resetTimer = () => {
-		setMinutes(0);
-		setSeconds(0);
-	};
-
-	useEffect(() => {
-		if (minutes === 0 && seconds < 0) {
-			pauseTimer();
-			resetTimer();
-		} else if (seconds < 0) {
-			const min = minutes > 1 ? minutes - 1 : 0;
-			setMinutes(min);
-			setSeconds(59);
-		}
+		// console.log('componentDidMount');
+		return () => {
+			// console.log('componentWillUnmount');
+			clearInterval(timer);
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [minutes, seconds]);
+	}, []);
 
 	useEffect(() => {
+		// console.log('DidUpdate');
 		if (status === statusTask.completed) {
 			pauseTimer();
-		} else if (status === statusTask.notCompleted) {
+		} else if (status === statusTask.notCompleted && !isRunning) {
 			startTimer();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
-
-	useEffect(() => {
-		return () => {
-			pauseTimer();
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	return (
 		<span className="task-timer">
