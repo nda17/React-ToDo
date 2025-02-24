@@ -39,7 +39,7 @@ export const NewTaskForm = props => {
 
 	const handleKey = e => {
 		if (
-			e.target.closest('.new-todo-form') &&
+			e.target.closest('#form') &&
 			e.key === 'Enter' &&
 			task &&
 			min &&
@@ -52,7 +52,7 @@ export const NewTaskForm = props => {
 	};
 
 	return (
-		<form className={styles.form} onKeyDown={e => handleKey(e)}>
+		<form className={styles.form} id="form" onKeyDown={e => handleKey(e)}>
 			<input
 				className={clsx(styles['task-value'])}
 				value={task}
