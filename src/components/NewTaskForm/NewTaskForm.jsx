@@ -1,6 +1,5 @@
-import clsx from 'clsx';
 import { useState } from 'react';
-import styles from './NewTaskForm.module.css';
+import './NewTaskForm.css'
 
 export const NewTaskForm = props => {
 	const { handleAddOrEdit = Function.prototype } = props;
@@ -39,7 +38,7 @@ export const NewTaskForm = props => {
 
 	const handleKey = e => {
 		if (
-			e.target.closest('#form') &&
+			e.target.closest('.new-task-form') &&
 			e.key === 'Enter' &&
 			task &&
 			min &&
@@ -52,23 +51,23 @@ export const NewTaskForm = props => {
 	};
 
 	return (
-		<form className={styles.form} id="form" onKeyDown={e => handleKey(e)}>
+		<form className="new-task-form" onKeyDown={e => handleKey(e)}>
 			<input
-				className={clsx(styles['task-value'])}
+				className="task-value"
 				value={task}
 				placeholder="Task"
 				onChange={e => handleChangeTask(e)}
 				autoFocus
 			/>
 			<input
-				className={clsx(styles['task-timer-min'])}
+				className="task-timer-min"
 				value={min}
 				placeholder="Min"
 				onChange={e => handleChangeMin(e)}
 				autoFocus
 			/>
 			<input
-				className={clsx(styles['task-timer-sec'])}
+				className="task-timer-sec"
 				value={sec}
 				placeholder="Sec"
 				onChange={e => handleChangeSec(e)}

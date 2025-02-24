@@ -1,6 +1,5 @@
-import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-import styles from './TaskTimer.module.css';
+import './TaskTimer.css';
 
 export const TaskTimer = props => {
 	const { min, sec, status, statusTask } = props;
@@ -71,20 +70,18 @@ export const TaskTimer = props => {
 	}, []);
 
 	return (
-		<span className={styles.wrapper}>
+		<span className="task-timer">
 			<button
-				className={clsx(styles['icon-play'])}
+				className="timer-icon-play"
 				disabled={isRunning}
 				onClick={startTimer}
 			></button>
 			<button
-				className={clsx(styles['icon-pause'])}
+				className="timer-icon-pause"
 				disabled={!isRunning}
 				onClick={pauseTimer}
 			></button>
-			<span
-				className={styles.values}
-			>{`${formatTime(minutes)}:${formatTime(seconds)}`}</span>
+			<span className="timer-values">{`${formatTime(minutes)}:${formatTime(seconds)}`}</span>
 		</span>
 	);
 };

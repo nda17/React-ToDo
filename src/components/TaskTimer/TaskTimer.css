@@ -1,0 +1,32 @@
+.task-timer {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.timer-icon-play,
+.timer-icon-pause {
+	color: #cc9a9a;
+	cursor: pointer;
+	margin: auto 0;
+}
+
+.timer-icon-pause {
+	font-size: 18px;
+}
+
+.timer-icon-play {
+	font-size: 15px;
+}
+
+.timer-values {
+	font-size: 15px;
+}
+
+.timer-icon-pause:after {
+	content: '⏸';
+}
+
+.timer-icon-play:after {
+	content: '▶';
+}

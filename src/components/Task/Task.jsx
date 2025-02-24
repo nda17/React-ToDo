@@ -1,5 +1,6 @@
 import { formatDistanceToNow } from 'date-fns';
 import { useState } from 'react';
+import { TaskTimer } from '../TaskTimer/TaskTimer';
 import './Task.css';
 
 export const Task = props => {
@@ -8,6 +9,8 @@ export const Task = props => {
 	const {
 		id,
 		text,
+		min,
+		sec,
 		status,
 		creationDate,
 		statusTask,
@@ -54,6 +57,14 @@ export const Task = props => {
 					<span onClick={handleStatus} className="description">
 						{text}
 					</span>
+
+					<TaskTimer
+						min={min}
+						sec={sec}
+						status={status}
+						statusTask={statusTask}
+					/>
+
 					<span className="created">
 						{`created ${formatDistanceToNow(creationDate)}`}
 					</span>
