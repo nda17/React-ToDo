@@ -28,16 +28,14 @@ export const Task = props => {
 	};
 
 	const handleEdit = () => {
-		setEdit(prevState => ({
-			edit: !prevState.edit
-		}));
+		setEdit(prevState => !prevState);
 	};
 
 	const handleKey = event => {
-		if (event.key === 'Enter') {
+		if (event.target.closest('.task') && event.key === 'Enter') {
 			const typeAction = 'edit';
 			event.preventDefault();
-			handleAddOrEdit(event.target.value, id, typeAction);
+			handleAddOrEdit(event.target.value, min, sec, id, typeAction);
 			handleEdit();
 		}
 	};
@@ -48,6 +46,7 @@ export const Task = props => {
 		>
 			<div className="view">
 				<input
+					autoFocus={true}
 					className="toggle"
 					type="checkbox"
 					checked={status === statusTask.completed}

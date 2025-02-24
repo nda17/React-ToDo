@@ -17,60 +17,60 @@ export const NewTaskForm = props => {
 		setSec('');
 	};
 
-	const handleChangeTask = e => {
-		setTask(e.target.value.trim());
+	const handleChangeTask = event => {
+		setTask(event.target.value.trim());
 	};
 
-	const handleChangeMin = e => {
-		const inputValue = Number(e.target.value.trim());
+	const handleChangeMin = event => {
+		const inputValue = Number(event.target.value.trim());
 
 		if (validateInput(inputValue)) {
 			setMin(inputValue);
 		}
 	};
 
-	const handleChangeSec = e => {
-		const inputValue = Number(e.target.value.trim());
+	const handleChangeSec = event => {
+		const inputValue = Number(event.target.value.trim());
 		if (validateInput(inputValue)) {
 			setSec(inputValue);
 		}
 	};
 
-	const handleKey = e => {
+	const handleKey = event => {
 		if (
-			e.target.closest('.new-task-form') &&
-			e.key === 'Enter' &&
+			event.target.closest('.new-task-form') &&
+			event.key === 'Enter' &&
 			task &&
 			min &&
 			sec
 		) {
-			e.preventDefault();
+			event.preventDefault();
 			handleAddOrEdit(task, min, sec);
 			resetValue();
 		}
 	};
 
 	return (
-		<form className="new-task-form" onKeyDown={e => handleKey(e)}>
+		<form className="new-task-form" onKeyDown={event => handleKey(event)}>
 			<input
 				className="task-value"
 				value={task}
 				placeholder="Task"
-				onChange={e => handleChangeTask(e)}
+				onChange={event => handleChangeTask(event)}
 				autoFocus
 			/>
 			<input
 				className="task-timer-min"
 				value={min}
 				placeholder="Min"
-				onChange={e => handleChangeMin(e)}
+				onChange={event => handleChangeMin(event)}
 				autoFocus
 			/>
 			<input
 				className="task-timer-sec"
 				value={sec}
 				placeholder="Sec"
-				onChange={e => handleChangeSec(e)}
+				onChange={event => handleChangeSec(event)}
 				autoFocus
 			/>
 		</form>
