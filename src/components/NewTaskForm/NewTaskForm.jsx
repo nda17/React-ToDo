@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './NewTaskForm.css'
+import './NewTaskForm.css';
 
 export const NewTaskForm = props => {
 	const { handleAddOrEdit = Function.prototype } = props;
