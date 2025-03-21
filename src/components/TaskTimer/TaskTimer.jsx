@@ -67,12 +67,12 @@ export const TaskTimer = props => {
 		<span className="task-timer">
 			<button
 				className="timer-icon-play"
-				disabled={isRunning}
+				disabled={isRunning || status === statusTask.completed}
 				onClick={startTimer}
 			></button>
 			<button
 				className="timer-icon-pause"
-				disabled={!isRunning}
+				disabled={!isRunning || status === statusTask.completed}
 				onClick={pauseTimer}
 			></button>
 			<span className="timer-values">{`${formatTime(minutes)}:${formatTime(seconds)}`}</span>
