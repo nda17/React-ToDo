@@ -45,16 +45,16 @@ export const TaskTimer = props => {
 	};
 
 	useEffect(() => {
-		// console.log('componentDidMount');
+		//componentDidMount
 		return () => {
-			// console.log('componentWillUnmount');
+			//componentWillUnmount
 			clearInterval(timer);
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
-		// console.log('DidUpdate');
+		//DidUpdate
 		if (status === statusTask.completed) {
 			pauseTimer();
 		} else if (status === statusTask.notCompleted && !isRunning) {
