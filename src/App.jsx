@@ -3,8 +3,7 @@ import { Footer, Header, Main } from './layout';
 
 export const App = () => {
 	const [data, setData] = useState([]);
-	const [currentStatusTask, setCurrentStatusTask] =
-		useState('without a status');
+	const [activeTab, setActiveTab] = useState('without a status');
 
 	const statusTask = {
 		withoutStatus: 'without a status',
@@ -14,15 +13,15 @@ export const App = () => {
 
 	const handleFilter = status => {
 		if (!status) {
-			setCurrentStatusTask(statusTask.withoutStatus);
+			setActiveTab(statusTask.withoutStatus);
 		}
 
 		if (status === statusTask.notCompleted) {
-			setCurrentStatusTask(statusTask.notCompleted);
+			setActiveTab(statusTask.notCompleted);
 		}
 
 		if (status === statusTask.completed) {
-			setCurrentStatusTask(statusTask.completed);
+			setActiveTab(statusTask.completed);
 		}
 	};
 
@@ -92,7 +91,7 @@ export const App = () => {
 			<Header handleAddOrEdit={handleAddOrEdit} />
 			<Main
 				data={data}
-				currentStatusTask={currentStatusTask}
+				activeTab={activeTab}
 				statusTask={statusTask}
 				handleAddOrEdit={handleAddOrEdit}
 				handleDelete={handleDelete}
@@ -100,7 +99,7 @@ export const App = () => {
 			/>
 			<Footer
 				data={data}
-				currentStatusTask={currentStatusTask}
+				activeTab={activeTab}
 				handleFilter={handleFilter}
 				handleDeleteCompleted={handleDeleteCompleted}
 				statusTask={statusTask}

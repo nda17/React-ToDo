@@ -3,7 +3,7 @@ import './TasksFilter.css';
 export const TasksFilter = props => {
 	const {
 		data = [],
-		currentStatusTask,
+		activeTab,
 		handleDeleteCompleted = Function.prototype,
 		handleFilter = Function.prototype,
 		statusTask
@@ -23,30 +23,34 @@ export const TasksFilter = props => {
 			<ul className="filters">
 				<li>
 					<button
+						type="button"
 						onClick={() => handleClick()}
-						className={`${currentStatusTask === statusTask.withoutStatus ? 'selected' : null}`}
+						className={`${activeTab === statusTask.withoutStatus ? 'selected' : null}`}
 					>
 						All
 					</button>
 				</li>
 				<li>
 					<button
+						type="button"
 						onClick={() => handleClick(statusTask.notCompleted)}
-						className={`${currentStatusTask === statusTask.notCompleted ? 'selected' : null}`}
+						className={`${activeTab === statusTask.notCompleted ? 'selected' : null}`}
 					>
 						Active
 					</button>
 				</li>
 				<li>
 					<button
+						type="button"
 						onClick={() => handleClick(statusTask.completed)}
-						className={`${currentStatusTask === statusTask.completed ? 'selected' : null}`}
+						className={`${activeTab === statusTask.completed ? 'selected' : null}`}
 					>
 						Completed
 					</button>
 				</li>
 			</ul>
 			<button
+				type="button"
 				onClick={() => handleDeleteCompleted()}
 				className="clear-completed"
 			>

@@ -4,7 +4,7 @@ import './Footer.css';
 export const Footer = props => {
 	const {
 		data = [],
-		currentStatusTask,
+		activeTab,
 		handleFilter = Function.prototype,
 		handleDeleteCompleted = Function.prototype,
 		statusTask
@@ -14,7 +14,7 @@ export const Footer = props => {
 		<footer className="footer">
 			<TasksFilter
 				data={data}
-				currentStatusTask={currentStatusTask}
+				activeTab={activeTab}
 				handleFilter={handleFilter}
 				handleDeleteCompleted={handleDeleteCompleted}
 				statusTask={statusTask}

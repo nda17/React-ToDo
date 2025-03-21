@@ -4,7 +4,7 @@ import './Main.css';
 export const Main = props => {
 	const {
 		data = [],
-		currentStatusTask,
+		activeTab,
 		statusTask,
 		handleAddOrEdit = Function.prototype,
 		handleDelete = Function.prototype,
@@ -15,7 +15,7 @@ export const Main = props => {
 		<section className="main">
 			<TaskList
 				data={data}
-				currentStatusTask={currentStatusTask}
+				activeTab={activeTab}
 				statusTask={statusTask}
 				handleAddOrEdit={handleAddOrEdit}
 				handleDelete={handleDelete}

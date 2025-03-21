@@ -11,6 +11,7 @@ export const Task = props => {
 		text,
 		min,
 		sec,
+		activeTab,
 		status,
 		creationDate,
 		statusTask,
@@ -42,7 +43,11 @@ export const Task = props => {
 
 	return (
 		<li
-			className={`task ${edit ? 'editing' : ''} ${status === statusTask.completed ? 'completed' : ''}`}
+			className={`task ${edit ? 'editing' : ''} 
+			${status === statusTask.completed ? 'completed' : ''} 
+			${activeTab === statusTask.withoutStatus ? 'active' : ''} 
+			${activeTab === statusTask.completed && status === statusTask.completed ? 'active' : ''} 
+			${activeTab === statusTask.notCompleted && status === statusTask.notCompleted ? 'active' : ''}`}
 		>
 			<div className="view">
 				<input

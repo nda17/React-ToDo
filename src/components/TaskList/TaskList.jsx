@@ -4,40 +4,21 @@ import './TaskList.css';
 export const TaskList = props => {
 	const {
 		data,
-		currentStatusTask,
+		activeTab,
 		statusTask,
 		handleAddOrEdit = Function.prototype,
 		handleDelete = Function.prototype,
 		handleUpdateStatus = Function.prototype
 	} = props;
 
-	const filterData = currentStatusTask => {
-		if (currentStatusTask === statusTask.withoutStatus) {
-			return data;
-		} else if (currentStatusTask === statusTask.notCompleted) {
-			const newData = data.filter(item => {
-				return item.status === statusTask.notCompleted;
-			});
-
-			return newData;
-		} else if (currentStatusTask === statusTask.completed) {
-			const newData = data.filter(item => {
-				return item.status === statusTask.completed;
-			});
-
-			return newData;
-		}
-	};
-
-	const filteredData = filterData(currentStatusTask);
-
 	return (
 		<ul className="todo-list">
-			{filteredData.map(item => {
+			{data.map(item => {
 				return (
 					<div key={item.id}>
 						<Task
 							{...item}
+							activeTab={activeTab}
 							statusTask={statusTask}
 							handleAddOrEdit={handleAddOrEdit}
 							handleDelete={handleDelete}
@@ -47,7 +28,7 @@ export const TaskList = props => {
 				);
 			})}
 
-			{!filteredData.length && <EmptyPlaceholder />}
+			{!data.length && <EmptyPlaceholder />}
 		</ul>
 	);
 };
