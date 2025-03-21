@@ -8,7 +8,7 @@ export const NewTaskForm = props => {
 	const [sec, setSec] = useState('');
 
 	const validateInput = value => {
-		return /^(?:[0-9]|[1-5]\d|60)?$/.test(value);
+		return /^(?:[0-9]|[1-5]\d|59)?$/.test(value);
 	};
 
 	const resetValue = () => {
