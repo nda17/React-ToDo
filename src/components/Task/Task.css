@@ -18,6 +18,7 @@
 .task {
 	position: relative;
 	font-size: 24px;
+	display: none;
 }
 
 .task:last-child {
@@ -146,4 +147,8 @@
 		background: none;
 		height: 40px;
 	}
+}
+
+.active {
+	display: block;
 }
